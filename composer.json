@@ -10,5 +10,10 @@
             "name": "Andy Holmes",
             "email": "info@andyholmes.me"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    }
 }
