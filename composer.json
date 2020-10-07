@@ -1,0 +1,14 @@
+{
+    "name": "andy/instagram-api",
+    "description": "A simple Instagram API tool",
+    "type": "project",
+    "require": {
+        "guzzlehttp/guzzle": "^7.1"
+    },
+    "authors": [
+        {
+            "name": "Andy Holmes",
+            "email": "info@andyholmes.me"
+        }
+    ]
+}
