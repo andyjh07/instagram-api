@@ -5,6 +5,7 @@ namespace App;
 use GuzzleHttp\Client as Guzzle;
 
 class Instagram {
+  
   private $token;
 
   public function __construct($token)
@@ -12,7 +13,7 @@ class Instagram {
     $this->token = $token;
   }
 
-  public function feed()
+  public function feed(int $limit, array $types = [])
   {
     $client = new Guzzle([
       'base_uri' => 'https://graph.instagram.com/'
@@ -21,20 +22,20 @@ class Instagram {
     $res = $client->request('GET', 'me/media', [
       'query' => [
         'fields' => 'id,caption,media_type,media_url,username,timestamp',
-        'limit' => 6,
-        'access_token' => "IGQVJYYUpzZA043UnJtVEpyZA0UwT1pfWWROQTczZA3Q3ZAUM0UTRhTW9iR2RoNFFSbHZAyYTFnanNWTVZArUjhoaUlxQngxNFNqU3l1THp4T2p0RGE5Sk1kUlRvQVNDY1dVQTRRLU5JQzB3"
+        'limit' => $limit,
+        'access_token' => $this->token
       ]
     ]);
     
     if($res->getStatusCode() == 200){
     
-      $result = json_decode($res->getBody());
+      $feed = json_decode($res->getBody());
     
-      foreach($result->data as $item){
-        if($item->media_type == 'VIDEO'){
+      foreach($feed->data as $item){
+        if($types && !in_array($item->media_type, $types)){
           continue;
         }
-    
+
         echo "<img src='$item->media_url'>";
         echo "<p>$item->caption</p>";
       }
