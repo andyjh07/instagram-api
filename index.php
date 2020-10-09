@@ -2,10 +2,10 @@
 
 require 'vendor/autoload.php';
 
-$instagram = new App\Instagram("IGQVJYYUpzZA043UnJtVEpyZA0UwT1pfWWROQTczZA3Q3ZAUM0UTRhTW9iR2RoNFFSbHZAyYTFnanNWTVZArUjhoaUlxQngxNFNqU3l1THp4T2p0RGE5Sk1kUlRvQVNDY1dVQTRRLU5JQzB3");
-$items = $instagram->feed(6, ['IMAGE', 'CAROUSEL_ALBUM']);
+$instagram = new App\Instagram("IGQVJVU1JGcHo4RDhsNm5TUGxHdjFOVWkyZAWpzclJGLThpZAFJXS1hfRFJxX2xvd0FCaWttVlZAhdHBRcS1MRE1oWTBjemlycUtweVp0MnROYjkxcGtJbkEtUllDYzdHbktaMU1PLWZAhTVhFT3E0aDBMbwZDZD");
+$items = $instagram->getFeed(6, ['IMAGE', 'CAROUSEL_ALBUM']);
 
 foreach($items as $item){
-  echo $item->media_url;
+  echo "<a href='{$item->permalink}' target='_blank'><img src='{$item->media_url}'></a>";
 }
 ?>

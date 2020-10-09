@@ -9,11 +9,8 @@ class Instagram {
   private $token;
   private $client;
 
-  public function __construct($token)
+  public function __construct(string $token)
   {
-    /**
-     * Set up a new Guzzle client
-     */
     $this->client = new Guzzle([
       'base_uri' => 'https://graph.instagram.com/'
     ]);
@@ -21,14 +18,14 @@ class Instagram {
     $this->token = $token;
   }
 
-  public function feed(int $limit, array $types = [])
-  {    
-    /**
-     * Query the endpoint to get the data
-     */
+  /**
+   * Query the endpoint to get the data
+   */
+  public function getFeed(int $limit, array $types = [])
+  {
     $res = $this->client->request('GET', 'me/media', [
       'query' => [
-        'fields' => 'id,caption,media_type,media_url,username,timestamp',
+        'fields' => 'id,caption,permalink,media_type,media_url,username,timestamp',
         'limit' => $limit,
         'access_token' => $this->token
       ]
@@ -53,11 +50,11 @@ class Instagram {
     }
   }
 
+  /**
+   * Query the endpoint to refresh the token
+   */
   public function renewToken()
   {
-    /**
-     * Query the endpoint to get the new token
-     */
     $res = $this->client->request('GET', 'refresh_access_token', [
       'query' => [
         'grant_type' => 'ig_refresh_token',
