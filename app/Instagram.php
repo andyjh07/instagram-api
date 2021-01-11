@@ -8,14 +8,15 @@ class Instagram {
   
   private $token;
   private $client;
+  private $file = "insta.dat";
 
-  public function __construct(string $token)
+  public function __construct()
   {
     $this->client = new Guzzle([
       'base_uri' => 'https://graph.instagram.com/'
     ]);
 
-    $this->token = $token;
+    $this->token = file_get_contents($this->file);
   }
 
   /**
@@ -62,12 +63,16 @@ class Instagram {
       ]
     ]);
 
-    $result = json_decode($res->getBody());
-    
-    echo $result->access_token;
+    if($res->getStatusCode() == 200){
+      $result = json_decode($res->getBody());
+      $token = $result->access_token;
+    } else {
+      $token = $this->token;
+    }
 
-    /**
-     * TODO: Save new token somewhere, run this function inside a cron every 30 days
-     */
+    $token = $this->token;
+    
+    // Save token to .dat file
+    file_put_contents($this->file, $token);
   }
 }
