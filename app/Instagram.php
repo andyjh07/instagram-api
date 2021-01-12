@@ -70,8 +70,6 @@ class Instagram {
       $token = $this->token;
     }
 
-    $token = $this->token;
-    
     // Save token to .dat file
     file_put_contents($this->file, $token);
   }
