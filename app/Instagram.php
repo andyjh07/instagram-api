@@ -8,7 +8,7 @@ class Instagram {
   
   private $token;
   private $client;
-  private $file = "insta.dat";
+  private $file = "instagram.dat";
 
   public function __construct()
   {
