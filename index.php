@@ -4,6 +4,7 @@ require 'vendor/autoload.php';
 
 $instagram = new App\Instagram();
 $items = $instagram->getFeed(6, ['IMAGE', 'CAROUSEL_ALBUM']);
+
 ?>
 
 <div id="instagramFeed">
